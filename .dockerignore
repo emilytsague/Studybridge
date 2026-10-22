@@ -1,0 +1,16 @@
+.git
+.env
+.env.*
+data
+node_modules
+sites-source
+tests
+docs
+*.zip
+backups
+data-restored-*
+.voice-runtime
+voices
+.tools
+.azure-session
+publication
