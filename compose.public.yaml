@@ -1,0 +1,42 @@
+services:
+  studybridge:
+    build: .
+    environment:
+      NODE_ENV: production
+      HOST: 0.0.0.0
+      PORT: 3000
+      DATA_DIR: /app/data
+      PUBLIC_ORIGIN: https://${PUBLIC_DOMAIN:?Configure PUBLIC_DOMAIN}
+      COOKIE_SECURE: "true"
+      TRUST_PROXY: "true"
+      REGISTRATION_CODE: ""
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      OPENAI_MODEL: ${OPENAI_MODEL:-}
+      AI_REQUESTS_PER_HOUR: 20
+    volumes:
+      - studybridge_data:/app/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:3000/api/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+  https:
+    image: caddy:2-alpine
+    environment:
+      PUBLIC_DOMAIN: ${PUBLIC_DOMAIN:?Configure PUBLIC_DOMAIN}
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      studybridge:
+        condition: service_healthy
+    restart: unless-stopped
+volumes:
+  studybridge_data:
+  caddy_data:
+  caddy_config:

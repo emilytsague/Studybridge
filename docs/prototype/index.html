@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="de">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>StudyBridge · Lernprototyp</title><link rel="stylesheet" href="style.css"><script defer src="prototype.js"></script></head>
+<body>
+<header><a class="brand" href="#">sb<span>StudyBridge.</span></a><div class="languages" aria-label="Sprache"><button data-lang="de" aria-pressed="true">DE</button><button data-lang="fr" aria-pressed="false">FR</button></div></header>
+<main>
+<section class="intro"><p class="eyebrow" id="eyebrow">LERNEN ÜBER SPRACHGRENZEN HINWEG</p><h1 id="title">Verstehen. Wiederholen.<br>Weiterkommen.</h1><p id="intro">Ein Lernablauf für internationale Studierende. Probiere eine Karte und einen kurzen Selbsttest aus.</p><span class="tag" id="tag">Interaktiver Prototyp · Fiktive Beispieldaten</span></section>
+<section class="workspace" aria-label="Lernbereich"><aside><span class="eyebrow" id="session">DEINE LERNEINHEIT</span><h2 id="topic">Geschäftsprozesse</h2><p id="subtitle">Von einer Anfrage zum Ergebnis.</p><label id="progress-label" for="progress">Sitzungsfortschritt</label><progress id="progress" max="2" value="0"></progress><p id="progress-text" role="status">0 / 2 Aktivitäten</p><button id="reset" class="secondary">Neu beginnen</button></aside>
+<div class="activities"><article><span class="step">01 / <span id="read-label">VERSTEHEN</span></span><h2 id="lesson-title">Was ist ein Geschäftsprozess?</h2><p id="lesson">Ein Geschäftsprozess verbindet mehrere Tätigkeiten mit einem Ziel. Beispiel: Eine Bibliothek erhält eine Reservierung, prüft die Verfügbarkeit und stellt das Buch bereit.</p><p class="translation" id="translation">FR · Un processus métier relie plusieurs activités pour atteindre un objectif.</p></article>
+<article><span class="step">02 / <span id="card-label">WIEDERHOLEN</span></span><button id="flashcard" class="flashcard" aria-label="Lernkarte umdrehen"><small id="card-hint">KARTE UMDREHEN ↗</small><strong id="card-text">Geschäftsprozess</strong><span id="card-note">Was bedeutet dieser Begriff?</span></button></article>
+<article><span class="step">03 / <span id="quiz-label">ANWENDEN</span></span><h2 id="question">Was ist das Ziel des Bibliotheksprozesses?</h2><div id="answers" class="answers"></div><p id="feedback" role="status" aria-live="polite"></p></article></div></section>
+<section class="about"><h2 id="about-title">Über diesen Prototyp</h2><p id="about">Diese Vorschau zeigt den Lernablauf, ohne Konten, Uploads oder KI-Aufrufe. Eingaben bleiben in dieser Sitzung. StudyBridge entstand mit umfangreicher Unterstützung durch generative KI, darunter ChatGPT/Codex.</p><a href="../KI-TRANSPARENZ.md" id="transparency">KI-Unterstützung & Projektbeitrag ↗</a></section>
+</main><footer>StudyBridge · Emily Lucresse Tsague Mboning · Portfolio</footer>
+</body></html>

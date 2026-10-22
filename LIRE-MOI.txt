@@ -1,0 +1,28 @@
+STUDYBRIDGE - UTILISATION SUR TON ORDINATEUR
+
+1. Double-clique sur DEMARRER.cmd.
+2. Garde sa fenêtre ouverte et visite http://localhost:3000.
+3. Crée ton compte ou connecte-toi. Choisis un mot de passe de 12 caractères minimum.
+4. Le bandeau indique si ta progression est sauvegardée sur ton compte.
+5. Pour arrêter : Ctrl+C dans la fenêtre du serveur.
+
+SAUVEGARDE
+Arrête d'abord le serveur, puis double-clique sur SAUVEGARDER.cmd.
+Les copies sont dans backups. Copie-les régulièrement sur un autre disque.
+Les comptes, cours, notes, résultats et examens sont dans data (ou DATA_DIR).
+Une copie du code seul ne sauvegarde pas tes données.
+
+RESTAURATION ET MOT DE PASSE OUBLIÉ
+Consulte docs/UTILISATION.md. Les outils sont locaux : aucun e-mail n'est envoyé.
+
+INTELLIGENCE ARTIFICIELLE
+Le site fonctionne sans clé API. Pour activer l'assistant, renseigne
+OPENAI_API_KEY et OPENAI_MODEL dans .env, puis redémarre.
+Ne transmets jamais ta clé dans le chat et ne la place pas dans public.
+Le studio anime Aya et Noé localement : 3 décors, sous-titres et export HD
+de 15 secondes à 6 minutes, sans son. Voir docs/STUDIO-ANIME.md.
+Les PDF scannés nécessitent un OCR externe avant l'import pour obtenir du texte.
+
+MISE EN LIGNE ULTÉRIEURE
+Le site reste local. Les fichiers Docker et docs/DEPLOIEMENT.md permettent
+de préparer plus tard un serveur avec HTTPS et disque persistant.

@@ -1,0 +1,6 @@
+{$PUBLIC_DOMAIN} {
+    encode gzip
+    reverse_proxy studybridge:3000 {
+        header_up X-StudyBridge-Client-IP {remote_host}
+    }
+}

@@ -1,0 +1,15 @@
+services:
+  studybridge:
+    build: .
+    ports:
+      - "3000:3000"
+    env_file: .env
+    environment:
+      HOST: 0.0.0.0
+      PORT: 3000
+      DATA_DIR: /app/data
+    volumes:
+      - studybridge_data:/app/data
+    restart: unless-stopped
+volumes:
+  studybridge_data:
