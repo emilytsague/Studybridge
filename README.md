@@ -1,12 +1,14 @@
 # StudyBridge
 
-**Présentation du projet :** [Portfolio en allemand](README.portfolio.md) · [Prototype interactif](docs/prototype/index.html) · [Transparence sur l’utilisation de l’IA](docs/KI-TRANSPARENZ.md).
+**Présentation du projet :** [Portfolio en allemand](README.portfolio.md) · [Prototype interactif](docs/prototype/index.html).
 
-**Reprise locale du 20 octobre 2026 :** double-clique sur `DEMARRER.cmd`. Voir `LIRE-MOI.txt` et `docs/UTILISATION.md` pour les sauvegardes et la récupération de compte. La progression et les Klausur sont désormais sauvegardés par compte.
+**Projet personnel d’Emily Lucresse Tsague Mboning.** Les tests manuels, les vérifications et les ajustements de l’interface et des fonctionnalités finales ont été pris en charge par Emily. [Démarche et contributions](docs/KI-TRANSPARENZ.md).
+
+**Lancement local :** `DEMARRER.cmd`. Voir `LIRE-MOI.txt` et `docs/UTILISATION.md` pour les sauvegardes et la récupération de compte.
 
 Plateforme de révision pour étudiants internationaux : français ou anglais, avec l’allemand en parallèle.
 
-**Cette version fonctionne hors de ChatGPT.** Elle se lance avec Node.js, dispose de ses propres comptes et stocke les documents dans un dossier privé du serveur. Le code à la racine est la version à utiliser pour ton projet GitHub.
+L’application fonctionne sur un serveur Node.js, avec des comptes propres à StudyBridge et un stockage privé des documents par compte.
 
 **Studio anime local :** personnages originaux Aya et Noé, décors animés, storyboard éditable et export HD jusqu’à six minutes, sans frais API. Voir [docs/STUDIO-ANIME.md](docs/STUDIO-ANIME.md).
 
@@ -22,7 +24,7 @@ npm start
 ```
 
 4. Ouvre **http://localhost:3000** dans ton navigateur. Utilise cette adresse exacte : elle correspond à `PUBLIC_ORIGIN` dans `.env`.
-5. Clique sur **Connexion**, puis **Créer un compte**. Choisis un identifiant et un mot de passe d’au moins 12 caractères. Ce compte est propre à ton installation StudyBridge, sans lien avec ChatGPT.
+5. Clique sur **Connexion**, puis **Créer un compte**. Choisis un identifiant et un mot de passe d’au moins 12 caractères. Le compte est propre à cette installation StudyBridge.
 6. Va dans **Importer mes cours** pour ajouter un PDF, TXT ou MD.
 
 Sous Linux/macOS :
@@ -55,7 +57,7 @@ Pour arrêter : `Ctrl+C`. Pour le développement avec redémarrage du serveur : 
 | Vidéo IA avec personnages, voix et scènes générées | Non implémentée ; nécessite un service vidéo supplémentaire |
 | OCR des PDF scannés | Non inclus |
 
-**Validation de la reprise locale :** 22 tests automatisés réussis couvrent les API, l’isolation des documents, les erreurs, l’expiration du Klausur et les réponses IA simulées. La connexion réelle à OpenAI n’a pas été testée : aucune clé API réelle n’a été utilisée. L’import du PDF WIM, la sauvegarde des notes et examens, la remise automatique et l’export vidéo ont été vérifiés dans le navigateur intégré. Voir `docs/TESTS.md`.
+**Vérifications techniques documentées :** 22 tests automatisés réussis couvrent les API, l’isolation des documents, les erreurs, l’expiration du Klausur et les réponses IA simulées. La connexion réelle à OpenAI n’a pas été testée : aucune clé API réelle n’a été utilisée. L’import du PDF WIM, la sauvegarde des notes et examens, la remise automatique et l’export vidéo ont été vérifiés dans le navigateur intégré. Voir `docs/TESTS.md`.
 
 ## Arborescence
 
@@ -74,33 +76,14 @@ StudyBridge/
     portable.js              Connexion indépendante et interface IA
     login.html, login.js     Connexion et création de compte
     vendor/                  PDF.js et ressources, avec licence
-    WIM_Cours_complet_FR.pdf  Document source fourni
   tests/                     Tests Node.js
   docs/                      Installation, GitHub, API, déploiement, tests
   Dockerfile                 Conteneur optionnel
   compose.yaml               Démarrage Docker avec volume persistant
   .github/workflows/ci.yml   Exécution des tests à chaque push / pull request
-  sites-source/              Copie séparée du code spécifique à ChatGPT Sites
 ```
 
-`sites-source/` est fourni pour conserver le code de la version Sites et de ses modifications. **Tu n’en as pas besoin pour lancer la version indépendante.** Ses dépendances et son infrastructure sont distinctes. Aucun identifiant de déploiement, jeton Git, compte utilisateur ou secret n’est exporté.
-
-## GitHub
-
-Le guide complet est dans **[docs/GITHUB.md](docs/GITHUB.md)**. Depuis le dossier `StudyBridge` :
-
-```bash
-git init
-git add .
-git commit -m "Initial version of StudyBridge"
-git branch -M main
-git remote add origin https://github.com/TON_IDENTIFIANT/StudyBridge.git
-git push -u origin main
-```
-
-Remplace `TON_IDENTIFIANT` par ton identifiant GitHub et crée d’abord le dépôt vide sur GitHub. Aucun dépôt n’a été créé ni alimenté automatiquement dans ton compte.
-
-## Activer l’IA
+## Assistant pédagogique optionnel
 
 Dans `.env`, ajoute ta propre clé et le nom exact d’un modèle disponible pour ton compte API :
 
@@ -147,4 +130,5 @@ PDF.js est distribué avec sa licence dans `public/vendor/PDFJS-LICENSE`. Voir a
 ## Distribution GitHub
 
 Les comptes, documents personnels, sauvegardes et le PDF source WIM ne sont pas inclus. Les liens vers le PDF WIM nécessitent une copie locale de ce document. Les modèles de voix se téléchargent avec INSTALLER-VOIX.cmd. Le dossier sites-source est une archive historique non incluse dans cette distribution.
+
 
