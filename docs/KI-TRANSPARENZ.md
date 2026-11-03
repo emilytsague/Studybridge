@@ -1,29 +1,19 @@
-# KI-Unterstützung und persönlicher Beitrag
+# Entstehung und persönlicher Beitrag
 
-## Öffentliche Kurzfassung
+## Persönlicher Beitrag
 
-StudyBridge ist ein persönliches Lernprojekt mit umfangreicher Unterstützung durch generative KI, darunter ChatGPT/Codex. Wesentliche Teile von Code und Dokumentation wurden KI-gestützt erstellt. Die Anwendung dient dazu, einen mehrsprachigen Lernablauf zu erkunden und technische Zusammenhänge schrittweise zu verstehen.
+Ich bin Emily Lucresse Tsague Mboning und entwickle StudyBridge als persönliches Lernprojekt für die mehrsprachige Prüfungsvorbereitung weiter.
 
-## Was sich derzeit belegen lässt
+Meine Aufgaben umfassen:
+- manuelle Tests der Anwendung;
+- Überprüfung der Benutzeroberfläche und der Funktionen;
+- Anpassungen der Oberfläche und der finalen Funktionen anhand meiner Prüfungen.
 
-- Ein lokaler Quellcode mit Frontend, Node.js-Server und automatisierten Tests liegt vor.
-- Die KI-Unterstützung wird ausdrücklich benannt.
-- Die Projektdokumentation beschreibt den beobachteten Code, keine nachgewiesene alleinige Entwicklungsleistung von Emily.
+Mein Schwerpunkt liegt darauf, den Lernablauf aus Anwendersicht zu überprüfen und die Anwendung schrittweise zu verbessern.
 
-## Was Emily noch persönlich ergänzen sollte
+## Entwicklungsunterstützung
 
-Für jeden selbst übernommenen Beitrag sollten ein konkretes Beispiel und möglichst eine Datei, Änderung oder nachvollziehbare Prüfung angegeben werden:
+Generative KI unterstützte das Prototyping und die technische Umsetzung; wesentliche Teile des Codes und der Dokumentation wurden damit erstellt. Die manuellen Tests, Überprüfungen und genannten Anpassungen habe ich selbst übernommen. Automatisierte Tests sind separat in der [Testdokumentation](TESTS.md) beschrieben.
 
-| Bereich | Zu dokumentieren |
-|---|---|
-| Anforderungen | Welche Funktion wurde selbst vorgeschlagen und warum? |
-| Gestaltung | Welche Ansicht oder Formulierung wurde selbst ausgewählt oder verändert? |
-| Code | Welche Stelle wurde selbst geändert und kann erklärt werden? |
-| Prüfung | Welcher Ablauf wurde persönlich ausprobiert und mit welchem Ergebnis? |
-| Lernen | Was wird inzwischen verstanden, was noch nicht? |
+Die Anwendung basiert auf HTML, CSS, JavaScript und Node.js. „KI-unterstütztes Prototyping“ beschreibt hier die Entwicklungsmethode; es wird keine bestimmte Low-Code-Plattform eingesetzt.
 
-Solange diese Angaben fehlen, werden keine persönlichen Implementierungs- oder Testleistungen behauptet. Automatisierte Prüfungen durch ein Assistenzsystem sind nicht gleichbedeutend mit persönlich durchgeführten Tests.
-
-## Formulierung für ein Gespräch
-
-„StudyBridge ist ein Lernprojekt, bei dem ich umfangreich mit KI-Unterstützung gearbeitet habe. Der aktuelle Stand zeigt einen mehrsprachigen Lernprozess mit Karten, Quiz und Fortschritt. Ich unterscheide dabei klar zwischen KI-unterstützt erstelltem Code und den Teilen, die ich selbst erklären, ändern oder überprüfen kann.“
