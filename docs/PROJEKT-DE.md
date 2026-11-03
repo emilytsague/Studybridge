@@ -2,11 +2,11 @@
 
 ## Ziel und Abgrenzung
 
-StudyBridge ist ein KI-gestütztes Lernprojekt für mehrsprachige Prüfungsvorbereitung. Die vollständige Anwendung und der Portfolio-Prototyp haben unterschiedliche Aufgaben: Die Anwendung enthält Konten, Imports und optionale KI-Anbindung; die Vorschau demonstriert einen kurzen Lernablauf mit selbst erstellten Beispieldaten.
+StudyBridge ist ein persönliches Lernprojekt für mehrsprachige Prüfungsvorbereitung. Die vollständige Anwendung und der Portfolio-Prototyp haben unterschiedliche Aufgaben: Die Anwendung enthält Konten, Imports und optionale KI-Anbindung; die Vorschau demonstriert einen kurzen Lernablauf mit selbst erstellten Beispieldaten.
 
 ## Beispielanforderungen aus der vorhandenen Funktionalität
 
-Diese Anforderungen beschreiben den aktuellen Funktionsumfang. Sie sind keine Behauptung, dass Interviews oder formelle Nutzerstudien stattgefunden haben.
+Die folgenden Anforderungen beschreiben den aktuellen Funktionsumfang und dienen als Grundlage für nachvollziehbare Funktionsprüfungen.
 
 | ID | Anforderung | Überprüfbares Verhalten |
 |---|---|---|
@@ -56,4 +56,9 @@ Die Vorschau speichert keine Daten dauerhaft, sendet keine Nachrichten und ruft 
 
 ## Weiterentwicklung
 
-Nächste sinnvolle Schritte sind eine dokumentierte Nutzererprobung, Prüfung der Übersetzungen und eine nachvollziehbare Liste persönlich verstandener oder geänderter Funktionen. Das sind Vorhaben, keine bereits erzielten Ergebnisse.
+Geplant sind eine systematische Dokumentation weiterer manueller Testfälle, eine Nutzererprobung und die Prüfung der Übersetzungen.
+
+## Persönlicher Beitrag
+
+Emily Lucresse Tsague Mboning übernimmt die manuellen Tests, Überprüfungen und Anpassungen der Oberfläche sowie der finalen Funktionen. Die Entwicklungsmethode ist unter [Entstehung und persönlicher Beitrag](KI-TRANSPARENZ.md) beschrieben.
+
