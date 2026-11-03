@@ -4,7 +4,9 @@
 
 StudyBridge verbindet Erklärungen auf Französisch oder Englisch mit deutschen Fachbegriffen. Das Projekt untersucht einen konkreten Lernablauf: Inhalte verstehen, mit Lernkarten wiederholen, Wissen prüfen und den eigenen Fortschritt verfolgen.
 
-**Status:** persönliches Lernprojekt mit umfangreicher KI-Unterstützung. Kein kommerzielles Produkt und keine offizielle Hochschulanwendung.
+**Status:** persönliches Lernprojekt und funktionsfähiger Prototyp. Keine offizielle Hochschulanwendung.
+
+**Projektverantwortliche:** Emily Lucresse Tsague Mboning. Mein Schwerpunkt liegt auf manuellen Tests, der Überprüfung der Bedienung sowie Anpassungen der Oberfläche und der finalen Funktionen.
 
 ![Portfolio-Vorschau](docs/prototype/apercu.png)
 
@@ -12,7 +14,7 @@ StudyBridge verbindet Erklärungen auf Französisch oder Englisch mit deutschen 
 
 - [Interaktiver Portfolio-Prototyp](docs/prototype/index.html): fiktives Beispiel, ohne Anmeldung, API-Schlüssel oder echte Kursunterlagen.
 - [Projektbeschreibung und Architektur](docs/PROJEKT-DE.md)
-- [KI-Unterstützung und Eigenbeitrag](docs/KI-TRANSPARENZ.md)
+- [Entstehung und persönlicher Beitrag](docs/KI-TRANSPARENZ.md)
 - [Installation und technische Dokumentation](README.md)
 - [Tests und dokumentierte Prüfungen](docs/TESTS.md)
 
@@ -33,7 +35,7 @@ Internationale Studierende müssen häufig gleichzeitig fachliche Inhalte verste
 | KI-Assistent | Optionale serverseitige Integration; benötigt eigene Konfiguration |
 | Lernanimation | Lokales Storyboard und Videoexport; optionale lokale Sprachausgabe |
 
-Die Existenz einer Funktion im Code ist keine Zusage, dass sie produktionsreif ist. Grenzen und Prüfungen stehen in der technischen Dokumentation.
+Der aktuelle Stand ist ein Lernprototyp. Technische Grenzen und dokumentierte Prüfungen stehen in der Projektdokumentation.
 
 ## Technologien
 
@@ -41,11 +43,11 @@ JavaScript, HTML, CSS, Node.js, JSON-Dateispeicherung und PDF.js. Der Server ver
 
 ## Bezug zur Wirtschaftsinformatik
 
-Das Projekt lässt sich anhand von Nutzeranforderungen, Lernprozessen, Datenflüssen und nachvollziehbaren Funktionsgrenzen erklären. Ein fachlich sinnvolles Gespräch darüber ist möglich, ohne die vollständige Softwareentwicklung als Eigenleistung auszugeben.
+StudyBridge verbindet Nutzeranforderungen, Lernprozesse und technische Umsetzung. Mein praktischer Beitrag umfasst manuelle Tests und Überprüfungen sowie Anpassungen der Oberfläche und der finalen Funktionen. Damit stehen die Nutzbarkeit und die schrittweise Verbesserung des Lernablaufs im Mittelpunkt.
 
-## Transparenz zur Entstehung
+## Entwicklungsmethode
 
-Bei der Entwicklung und Dokumentation wurde generative KI, darunter ChatGPT/Codex, umfangreich eingesetzt. Wesentliche Teile der Implementierung und Dokumentation wurden mit KI-Unterstützung erstellt. Das Projekt wird deshalb als KI-gestütztes Lernprojekt vorgestellt. Welche konkreten Anforderungen, Änderungen und Prüfungen Emily selbst übernommen hat, wird vor einer entsprechenden persönlichen Aussage gesondert festgehalten.
+Die technische Umsetzung erfolgte mit KI-unterstütztem Prototyping. Die Aufteilung zwischen Entwicklungsunterstützung und meinem persönlichen Beitrag ist unter [Entstehung und persönlicher Beitrag](docs/KI-TRANSPARENZ.md) beschrieben.
 
 ## Lokal starten
 
@@ -56,3 +58,4 @@ npm start
 ```
 
 Die Anwendung läuft standardmäßig unter `http://localhost:3000`. Die KI-Funktionen benötigen zusätzlich eine private Serverkonfiguration. Keine API-Schlüssel, Kontodaten oder privaten Kursunterlagen in ein öffentliches Repository übernehmen.
+
