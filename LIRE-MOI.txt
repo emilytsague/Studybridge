@@ -1,28 +1,28 @@
-STUDYBRIDGE - UTILISATION SUR TON ORDINATEUR
+STUDYBRIDGE – LOKAL VERWENDEN
 
-1. Double-clique sur DEMARRER.cmd.
-2. Garde sa fenêtre ouverte et visite http://localhost:3000.
-3. Crée ton compte ou connecte-toi. Choisis un mot de passe de 12 caractères minimum.
-4. Le bandeau indique si ta progression est sauvegardée sur ton compte.
-5. Pour arrêter : Ctrl+C dans la fenêtre du serveur.
+1. Doppelklicke auf DEMARRER.cmd.
+2. Lasse das Fenster geöffnet und rufe http://localhost:3000 im Browser auf.
+3. Melde dich an oder erstelle ein Konto mit einem Kennwort aus mindestens zwölf Zeichen.
+4. Das Banner zeigt an, ob dein Lernfortschritt im Konto gespeichert ist.
+5. Beende den Server mit Strg+C im Serverfenster.
 
-SAUVEGARDE
-Arrête d'abord le serveur, puis double-clique sur SAUVEGARDER.cmd.
-Les copies sont dans backups. Copie-les régulièrement sur un autre disque.
-Les comptes, cours, notes, résultats et examens sont dans data (ou DATA_DIR).
-Une copie du code seul ne sauvegarde pas tes données.
+DATENSICHERUNG
+Beende zuerst den Server und doppelklicke auf SAUVEGARDER.cmd.
+Die Sicherungen liegen in backups. Kopiere sie regelmäßig auf ein anderes Laufwerk.
+Konten, Kurse, Notizen, Ergebnisse und Klausuren liegen in data oder in DATA_DIR.
+Eine Kopie des Quellcodes allein sichert diese Daten nicht.
 
-RESTAURATION ET MOT DE PASSE OUBLIÉ
-Consulte docs/UTILISATION.md. Les outils sont locaux : aucun e-mail n'est envoyé.
+WIEDERHERSTELLUNG UND VERGESSENES KENNWORT
+Siehe docs/UTILISATION.md. Die Werkzeuge laufen lokal und versenden keine E-Mails.
 
-INTELLIGENCE ARTIFICIELLE
-Le site fonctionne sans clé API. Pour activer l'assistant, renseigne
-OPENAI_API_KEY et OPENAI_MODEL dans .env, puis redémarre.
-Ne transmets jamais ta clé dans le chat et ne la place pas dans public.
-Le studio anime Aya et Noé localement : 3 décors, sous-titres et export HD
-de 15 secondes à 6 minutes, sans son. Voir docs/STUDIO-ANIME.md.
-Les PDF scannés nécessitent un OCR externe avant l'import pour obtenir du texte.
+KÜNSTLICHE INTELLIGENZ
+Die Anwendung funktioniert ohne API-Schlüssel. Trage für den Assistenten
+OPENAI_API_KEY und OPENAI_MODEL in .env ein und starte den Server neu.
+Teile deinen Schlüssel nicht im Chat und lege ihn nicht unter public ab.
+Das Studio animiert Aya und Noé lokal und unterstützt drei Hintergründe,
+Untertitel und HD-Exporte von 15 Sekunden bis sechs Minuten. Siehe docs/STUDIO-ANIME.md.
+Gescannte PDF-Dateien erfordern vor dem Import eine externe Texterkennung.
 
-MISE EN LIGNE ULTÉRIEURE
-Le site reste local. Les fichiers Docker et docs/DEPLOIEMENT.md permettent
-de préparer plus tard un serveur avec HTTPS et disque persistant.
+SPÄTERE VERÖFFENTLICHUNG
+Die Anwendung läuft lokal. Die Docker-Dateien und docs/DEPLOIEMENT.md
+beschreiben den späteren Betrieb mit HTTPS und dauerhaftem Speicher.

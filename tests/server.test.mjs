@@ -33,6 +33,8 @@ test('progress is private, validates inputs and rejects stale writes',async t=>{
  assert.equal((await save(a,{revision:1,state:{...state,done:[999]},exam:null})).status,400);
  assert.equal((await save(a,{revision:1,state,exam:{kind:'qcm'}})).status,400);
  assert.equal((await save(a,null)).status,400);
+ assert.equal((await save(a,{revision:1,state:{...state,lang:'de'},exam:null})).status,200);
+ assert.equal((await(await f.request('/api/progress',{headers:{Cookie:a}})).json()).state.lang,'de');
  assert.equal((await f.request('/api/progress',{method:'PUT',headers:{Cookie:a,Origin:'https://attacker.invalid','Content-Type':'application/json'},body:JSON.stringify({revision:1,state,exam:null})})).status,403);
 });
 test('sessions and progress survive restart; logout invalidates the stored session',async t=>{

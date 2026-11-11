@@ -1,61 +1,41 @@
-# Mettre StudyBridge sur ton GitHub
+# StudyBridge auf GitHub veröffentlichen
 
-## Méthode recommandée : Git depuis ton ordinateur
+Entpacke das Archiv und öffne den Ordner mit `server.mjs` und `package.json`. Installiere bei Bedarf [Git](https://git-scm.com/downloads). Erstelle auf GitHub ein privates oder öffentliches Repository namens StudyBridge. Beim ersten Upload brauchst du keine zusätzlichen Dateien über GitHub anzulegen.
 
-1. Extrais l’archive et ouvre le dossier qui contient `server.mjs` et `package.json`.
-2. Installe Git si nécessaire : https://git-scm.com/downloads
-3. Connecte-toi à ton compte sur https://github.com/ et crée un nouveau dépôt nommé `StudyBridge`.
-4. Choisis privé ou public. Pour ce premier envoi, laisse décochées les options de création d’un README, d’une licence et d’un `.gitignore`, car les fichiers du projet sont déjà fournis.
-5. Dans le terminal ouvert à la racine du projet, exécute :
+## Vor der Veröffentlichung prüfen
 
 ```bash
 git init
-git add .
-git commit -m "Initial version of StudyBridge"
-git branch -M main
-git remote add origin https://github.com/TON_IDENTIFIANT/StudyBridge.git
-git push -u origin main
-```
-
-La dernière commande peut ouvrir une demande d’authentification GitHub. Utilise ton propre compte.
-
-Si Git demande ton nom et ton adresse de commit, configure-les pour ce dépôt :
-
-```bash
-git config user.name "Ton nom"
-git config user.email "Ton adresse de commit GitHub"
-```
-
-Puis recommence la commande de commit. Tu peux utiliser l’adresse `noreply` fournie dans tes paramètres GitHub.
-
-## Vérification avant l’envoi
-
-```bash
 git status
 git ls-files .env data
 ```
 
-La seconde commande ne doit afficher aucun fichier. Le modèle `.env.example` peut être publié ; le vrai `.env` et `data/` doivent rester exclus.
-
-## Après une modification
+Die letzte Zeile darf keine Dateien auflisten. `.env.example` ist die öffentliche Vorlage. Die eigentliche Konfiguration und `data/` bleiben lokal. Prüfe auch die Liste der Dateien, die du zum Commit hinzufügst.
 
 ```bash
 git add .
-git commit -m "Describe the change"
-git push
+git commit -m "Erste Version von StudyBridge"
+git branch -M main
+git remote add origin https://github.com/DEIN_BENUTZERNAME/StudyBridge.git
+git push -u origin main
 ```
 
-## Depuis un autre ordinateur
+Melde dich bei einer Authentifizierungsabfrage mit deinem GitHub-Konto an. Falls Git Angaben zur Autorin verlangt, kannst du für dieses Repository deinen Namen und deine GitHub-Commit-Adresse eintragen. GitHub bietet dafür in den Kontoeinstellungen auch eine `noreply`-Adresse an.
 
 ```bash
-git clone https://github.com/TON_IDENTIFIANT/StudyBridge.git
+git config user.name "Dein Name"
+git config user.email "Deine GitHub-Commit-Adresse"
+```
+
+Füge nach Änderungen die gewünschten Dateien hinzu, erstelle einen Commit mit einer aussagekräftigen Nachricht und übertrage ihn mit `git push`.
+
+## Auf einem anderen Rechner starten
+
+```bash
+git clone https://github.com/DEIN_BENUTZERNAME/StudyBridge.git
 cd StudyBridge
 ```
 
-Copie `.env.example` vers `.env`, puis lance `npm start`. Les données de ton ancien ordinateur ne sont pas dans Git : copie aussi ton dossier `data/` en dehors du dépôt si tu veux transférer les comptes et documents.
+Kopiere `.env.example` nach `.env` und führe `npm start` aus. Übertrage `data/` separat, falls du bestehende Konten und Dokumente übernehmen möchtest.
 
-## Le rôle de GitHub
-
-GitHub conserve ton code et ses versions. Le serveur `server.mjs` doit être exécuté sur ton ordinateur ou un hébergement Node.js/Docker. Publier le code ne démarre pas automatiquement le serveur ni l’IA. Un hébergement purement statique ne peut pas exécuter les fonctions de comptes, fichiers privés et IA de ce projet.
-
-Le fichier `.github/workflows/ci.yml` propose un contrôle automatisé avec `npm test`. Ce workflow n’a pas été exécuté sur ton compte ; il démarrera après l’envoi si GitHub Actions y est autorisé.
+GitHub speichert den Quellcode und seine Versionen. Für Konten, private Dateien und KI muss `server.mjs` lokal oder auf einem Node.js- bzw. Docker-Server laufen. Der Workflow `.github/workflows/ci.yml` führt bei aktiviertem GitHub Actions `npm test` aus.

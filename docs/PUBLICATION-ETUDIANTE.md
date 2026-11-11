@@ -1,50 +1,23 @@
-# Publication sur un serveur étudiant
+# Veröffentlichung auf einem Hochschulserver
 
-La publication n'a pas encore eu lieu. Un compte d'hébergement activé par son propriétaire
-et un serveur accessible sont nécessaires. L'offre Azure for Students fournit des crédits
-limités, pas une garantie de serveur gratuit à vie : https://azure.microsoft.com/en-gb/free/students/
+Für die Veröffentlichung werden ein freigeschaltetes Hosting-Konto und ein erreichbarer Server benötigt. [Azure for Students](https://azure.microsoft.com/en-gb/free/students/) bietet ein begrenztes Guthaben. Prüfe die Kosten vor der Einrichtung und behalte das Ausgabenlimit bei. Die Person, der das Konto gehört, schließt die Hochschulverifizierung selbst ab.
 
-## Ce qui est préparé
+## Vorbereitete Konfiguration
 
-- Conteneur Linux avec Node.js, moteur vocal Piper et voix française.
-- HTTPS avec Caddy ; le port applicatif n'est pas exposé directement.
-- Volume permanent pour comptes, documents, sessions et progression.
-- Inscription ouverte : chaque visiteur crée son identifiant et son mot de passe.
-- Documents et progression séparés côté serveur par utilisateur.
-- Limites de connexion par adresse de visiteur transmise par le proxy de confiance.
+Der Linux-Container enthält Node.js, Piper und die französische Stimme. Caddy stellt HTTPS bereit. Ein dauerhaftes Volume speichert Konten, Dokumente, Sitzungen und Lernfortschritt. Besucher können eigene Konten erstellen. Dokumente und Lernfortschritt werden je Konto getrennt. Anmeldelimits verwenden die vom vertrauenswürdigen Proxy gemeldete Besucheradresse.
 
-## Étape à effectuer par le propriétaire
+## Bereitstellung
 
-Activer Azure for Students avec son adresse universitaire et terminer la vérification.
-Ne pas communiquer son mot de passe, ses codes de connexion ni ses clés dans le chat.
-Conserver le plafond de dépenses de l'offre et ne pas convertir l'abonnement en offre payante.
-Le dimensionnement et le coût estimé du serveur restent à vérifier avant sa création.
-
-## Déploiement une fois le serveur fourni
-
-Sur une VM Linux avec Docker Compose et un nom DNS pointant vers son IP :
+Auf einer Linux-VM mit Docker Compose und einem DNS-Namen, der auf die IP-Adresse der VM verweist:
 
 ```sh
 cp .env.public.example .env.public
-# Remplacer PUBLIC_DOMAIN par le nom DNS réel du serveur.
+# PUBLIC_DOMAIN auf den DNS-Namen des Servers setzen.
 docker compose --env-file .env.public -f compose.public.yaml up --build -d
 ```
 
-Autoriser les ports 80 et 443 sur le serveur. Le nom DNS fourni par l'hébergeur peut
-être utilisé ; l'achat d'un domaine personnel n'est pas nécessaire.
+Gib die Ports 80 und 443 frei. Der DNS-Name des Hosting-Anbieters genügt. Prüfe `/api/health`, lege zwei Testkonten an und bestätige, dass jedes Konto nur seine eigenen Dokumente sieht. Teste Vertonung und Videodownload, bevor du den Link veröffentlichst.
 
-Vérifier ensuite `/api/health`, créer deux comptes, importer un document dans le premier
-et vérifier qu'il est inaccessible au second. Tester une narration et le téléchargement
-d'une vidéo. Le lien public ne sera annoncé qu'après ces contrôles.
+Der Server startet mit eigenen Daten. Sichere das Volume `studybridge_data` und die Zertifikate regelmäßig. Verwende wegen der JSON-Speicherung eine einzelne Instanz. Studioprojekte bleiben je Konto im Browser. Exportierte Videos müssen heruntergeladen werden.
 
-Le serveur public démarre avec ses propres données ; les données de l'ordinateur
-ne sont pas envoyées automatiquement. Sauvegarder régulièrement le volume
-`studybridge_data` et les certificats. Ne pas supprimer les volumes à l'arrêt.
-Conserver une seule instance de l'application avec ce stockage en fichiers JSON.
-
-Les projets de studio restent enregistrés dans le navigateur de chaque personne,
-séparément par compte. Les vidéos doivent être téléchargées par leur auteur.
-
-## Validation du 21 octobre 2026
-
-22 tests automatisés réussis. La configuration Compose publique a été validée et l’image Docker a été construite avec succès. Dans un conteneur Linux isolé sans réseau externe : contrôle de santé HTTP 200, inscription HTTP 201 et synthèse vocale française fonctionnelle. HTTPS et accès depuis Internet restent à valider après l’activation du compte étudiant et la création du serveur.
+Am 21. Oktober 2026 wurden 22 automatisierte Tests, die Compose-Konfiguration und der Docker-Build geprüft. Der isolierte Container lieferte HTTP 200 beim Gesundheitscheck und HTTP 201 bei der Registrierung. Die französische Sprachsynthese funktionierte. HTTPS und Internetzugriff waren Gegenstand der ausstehenden Prüfung auf dem öffentlichen Server.

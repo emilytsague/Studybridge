@@ -9,10 +9,10 @@ if errorlevel 1 goto failure
 if errorlevel 1 goto failure
 ".voice-runtime\Scripts\python.exe" -m piper.download_voices fr_FR-siwis-medium --download-dir voices
 if errorlevel 1 goto failure
-echo Voix installee. Demarre ou redemarre StudyBridge.
+echo Stimme installiert. Starte StudyBridge neu.
 pause
 exit /b 0
 :failure
-echo Installation interrompue. Verifie Python et la connexion Internet, puis reessaie.
+echo Installation abgebrochen. Pruefe Python und die Internetverbindung und versuche es erneut.
 pause
 exit /b 1

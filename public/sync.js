@@ -1,5 +1,5 @@
 'use strict';
-// Only account-scoped caches are uploaded; legacy guest data remains local.
+// Nur Daten des jeweiligen Kontos werden übertragen. Frühere Gastdaten bleiben lokal.
 let progressReady=false,progressUser=null,progressRevision=0,progressDirty=false;
 let progressTimer=null,progressSending=null,progressStatus='loading',progressRemote=null;
 document.querySelector('#main').inert=true;
@@ -10,11 +10,11 @@ function cacheProgress(){
 function showSyncStatus(){
  let box=document.querySelector('#sync-status');
  if(!box){box=document.createElement('div');box.id='sync-status';box.className='sync-status';box.setAttribute('role','status');document.querySelector('.shell').prepend(box)}
- const messages={loading:tr('Chargement de ta progression…','Loading your progress…'),saved:tr('Progression sauvegardée sur ton compte','Progress saved to your account'),saving:tr('Sauvegarde en cours…','Saving…'),guest:tr('Mode invité : progression sur cet appareil','Guest mode: progress on this device'),error:tr('Sauvegarde en attente. Vérifie la connexion puis réessaie.','Save pending. Check your connection and retry.'),conflict:tr('Une autre fenêtre a modifié ta progression. Choisis la copie à conserver.','Another window changed your progress. Choose which copy to keep.'),'local-error':tr('Stockage du navigateur indisponible. Garde cette page ouverte et vérifie la sauvegarde.','Browser storage unavailable. Keep this page open and check saving.')};
+ const messages={loading:tr('Chargement de ta progression…','Loading your progress…', "Dein Fortschritt wird geladen …"),saved:tr('Progression sauvegardée sur ton compte','Progress saved to your account', "Fortschritt im Konto gespeichert"),saving:tr('Sauvegarde en cours…','Saving…', "Wird gespeichert …"),guest:tr('Mode invité : progression sur cet appareil','Guest mode: progress on this device', "Gastmodus: Fortschritt auf diesem Gerät"),error:tr('Sauvegarde en attente. Vérifie la connexion puis réessaie.','Save pending. Check your connection and retry.', "Speicherung ausstehend. Prüfe deine Verbindung und versuche es erneut."),conflict:tr('Une autre fenêtre a modifié ta progression. Choisis la copie à conserver.','Another window changed your progress. Choose which copy to keep.', "Ein anderes Fenster hat deinen Fortschritt geändert. Wähle die Kopie, die du behalten möchtest."),'local-error':tr('Stockage du navigateur indisponible. Garde cette page ouverte et vérifie la sauvegarde.','Browser storage unavailable. Keep this page open and check saving.', "Der Browserspeicher ist nicht verfügbar. Lasse diese Seite geöffnet und prüfe den Speicherstatus.")};
  box.textContent=messages[progressStatus]||messages.error;
- if(progressStatus==='error'){const b=document.createElement('button');b.className='text-link';b.textContent=tr('Réessayer','Retry');b.onclick=()=>flushProgress();box.append(' ',b)}
+ if(progressStatus==='error'){const b=document.createElement('button');b.className='text-link';b.textContent=tr('Réessayer','Retry', "Erneut versuchen");b.onclick=()=>flushProgress();box.append(' ',b)}
  if(progressStatus==='conflict'){
-  for(const [label,keepLocal] of [[tr('Conserver cette fenêtre','Keep this window'),true],[tr('Utiliser la copie du serveur','Use server copy'),false]]){const b=document.createElement('button');b.className='text-link';b.textContent=label;b.onclick=()=>{if(!confirm(tr('Confirmer ce choix de progression ?','Confirm this progress copy?')))return;progressRevision=progressRemote.revision;if(!keepLocal){state=progressRemote.state||emptyProgress();exam=progressRemote.exam;lang=state.lang;progressDirty=false;progressStatus='saved';cacheProgress();render();showSyncStatus()}else{progressStatus='saving';flushProgress()}};box.append(' · ',b)}
+  for(const [label,keepLocal] of [[tr('Conserver cette fenêtre','Keep this window', "Dieses Fenster beibehalten"),true],[tr('Utiliser la copie du serveur','Use server copy', "Kopie vom Server verwenden"),false]]){const b=document.createElement('button');b.className='text-link';b.textContent=label;b.onclick=()=>{if(!confirm(tr('Confirmer ce choix de progression ?','Confirm this progress copy?', "Diese Fortschrittskopie bestätigen?")))return;progressRevision=progressRemote.revision;if(!keepLocal){state=progressRemote.state||emptyProgress();exam=progressRemote.exam;lang=learningLanguage(state.lang);progressDirty=false;progressStatus='saved';cacheProgress();render();showSyncStatus()}else{progressStatus='saving';flushProgress()}};box.append(' · ',b)}
  }
 }
 async function switchAccountProgress(next){
@@ -23,11 +23,11 @@ async function switchAccountProgress(next){
  progressReady=false;progressUser=id;progressStatus='loading';showSyncStatus();
  KEY=id?'studybridge-v2-'+id:'studybridge-v1';EXAMKEY=id?'studybridge-exam-v2-'+id:'studybridge-klausur-v1';
  let cached=null,cachedExam=null,meta={};try{cached=JSON.parse(localStorage.getItem(KEY)||'null');cachedExam=JSON.parse(localStorage.getItem(EXAMKEY)||'null');meta=JSON.parse(localStorage.getItem(KEY+'-sync')||'{}')}catch{}
- state=cached||emptyProgress();exam=cachedExam;lang=state.lang==='en'?'en':'fr';progressRevision=meta.revision||0;progressDirty=!!meta.dirty;
+ state=cached||emptyProgress();exam=cachedExam;lang=learningLanguage(state.lang);progressRevision=meta.revision||0;progressDirty=!!meta.dirty;
  if(id){
   try{const remote=await api('/api/progress');progressRemote=remote;
    if(progressDirty&&cached){if(remote.revision!==progressRevision)progressStatus='conflict';else progressStatus='saving'}
-   else {state=remote.state||cached||emptyProgress();exam=remote.state?remote.exam:cachedExam;lang=state.lang;progressRevision=remote.revision;progressDirty=!remote.state;progressStatus=progressDirty?'saving':'saved'}
+   else {state=remote.state||cached||emptyProgress();exam=remote.state?remote.exam:cachedExam;lang=learningLanguage(state.lang);progressRevision=remote.revision;progressDirty=!remote.state;progressStatus=progressDirty?'saving':'saved'}
   }catch{progressStatus='error'}
  }else{progressDirty=false;progressStatus='guest'}
  if((cached?.lang||progressRemote?.state?.lang)&&document.querySelector('#welcome').open)document.querySelector('#welcome').close();
@@ -61,4 +61,4 @@ window.addEventListener('online',()=>{if(progressReady&&progressDirty&&progressS
 document.addEventListener('visibilitychange',()=>{if(document.hidden&&progressReady)flushProgress()});
 window.addEventListener('beforeunload',event=>{if(progressUser&&progressDirty){event.preventDefault();event.returnValue=''}});
 showSyncStatus();
-loadLibrary().then(()=>{if(!progressReady){progressStatus='error';document.querySelector('#main').inert=false;showSyncStatus();const b=document.createElement('button');b.textContent=tr('Recharger','Reload');b.onclick=()=>location.reload();document.querySelector('#sync-status').append(b)}});
+loadLibrary().then(()=>{if(!progressReady){progressStatus='error';document.querySelector('#main').inert=false;showSyncStatus();const b=document.createElement('button');b.textContent=tr('Recharger','Reload', "Neu laden");b.onclick=()=>location.reload();document.querySelector('#sync-status').append(b)}});

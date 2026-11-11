@@ -1,23 +1,17 @@
-# Composants et contenus tiers
+# Drittkomponenten und Lernmaterialien
 
 ## PDF.js
 
-Le lecteur PDF.js est fourni dans `public/vendor/`. Sa licence est conservée dans `public/vendor/PDFJS-LICENSE`. Les ressources de polices, tables de caractères et WebAssembly sont conservées avec le lecteur. Source du projet : https://github.com/mozilla/pdf.js
+PDF.js 5.6.205 wird mit Schriftdateien, Zeichentabellen und WebAssembly-Ressourcen unter `public/vendor/` mitgeliefert. Die Lizenz steht in `public/vendor/PDFJS-LICENSE`. [PDF.js-Quellcode](https://github.com/mozilla/pdf.js)
 
-## Cours WIM
+## WIM-Kurs
 
-`public/WIM_Cours_complet_FR.pdf` est le document fourni par l’utilisateur. Les fiches dans `public/content.js` sont des adaptations pédagogiques de ce support, avec traductions françaises, anglaises et allemandes. Leurs numéros de pages renvoient au PDF inclus.
+`public/content.js` enthält didaktische Bearbeitungen mit französischen, englischen und deutschen Fassungen. Seitenverweise beziehen sich auf `public/WIM_Cours_complet_FR.pdf`, sofern das Quelldokument lokal vorliegt. Das Archiv gewährt keine zusätzlichen Rechte an den Lernmaterialien.
 
-Aucune licence supplémentaire sur les supports pédagogiques n’est accordée par cette archive. Vérifie tes droits avant de les redistribuer dans un dépôt public.
+## Historische Sites-Variante
 
-## Variante Sites
+Die historische Variante in `sites-source/` verwendet Vinext/React und Sites-Komponenten. Manifest und Sperrdatei beschreiben ihre Abhängigkeiten. Installierte Abhängigkeiten und Zwischenspeicher sind nicht enthalten.
 
-`sites-source/` conserve une variante utilisant Vinext/React et des composants de démarrage Sites. Leurs dépendances sont décrites par le manifeste et le lockfile de ce sous-dossier. Les dépendances installées et leurs caches ne sont pas inclus.
+## Lokale Vertonung mit Piper und SIWIS
 
-Version PDF.js incluse : 5.6.205
-
-## Narration locale Piper / SIWIS
-
-Piper 1.8.0 : https://github.com/OHF-Voice/piper1-gpl (GPL-3.0). Le moteur est installé séparément dans .voice-runtime, exclu de Git. Conserver ses licences et respecter ses conditions en cas de redistribution.
-
-Modèle fr_FR-siwis-medium, publié par rhasspy : https://huggingface.co/rhasspy/piper-voices/tree/main/fr/fr_FR/siwis/medium . Fiche du modèle : https://huggingface.co/rhasspy/piper-voices/blob/main/fr/fr_FR/siwis/medium/MODEL_CARD . Données SIWIS : https://datashare.is.ed.ac.uk/handle/10283/2353 , attribution CC-BY 4.0 selon cette fiche. Les poids sont téléchargés séparément et exclus de Git.
+[Piper 1.8.0](https://github.com/OHF-Voice/piper1-gpl) steht unter GPL-3.0 und wird getrennt in `.voice-runtime` installiert. Das Modell `fr_FR-siwis-medium` wird getrennt heruntergeladen und ist von Git ausgeschlossen. Die [Modellkarte](https://huggingface.co/rhasspy/piper-voices/blob/main/fr/fr_FR/siwis/medium/MODEL_CARD) nennt CC BY 4.0 für den [SIWIS-Datensatz](https://datashare.is.ed.ac.uk/handle/10283/2353).
