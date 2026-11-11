@@ -1,62 +1,45 @@
-# Utilisation et entretien
+# Nutzung und Wartung
 
-Lancer `DEMARRER.cmd` sous Windows, puis ouvrir http://localhost:3000.
-Node.js 22.13+ suffit ; aucune installation de dépendances n'est requise.
-Si Node n'est pas dans le PATH, le lanceur utilise le runtime Codex présent sur cet ordinateur.
-Sur un autre ordinateur, installer Node.js au préalable.
+Starte unter Windows `DEMARRER.cmd` und öffne http://localhost:3000.
+Node.js ab Version 22.13 genügt. Zusätzliche Abhängigkeiten sind nicht erforderlich.
+Wenn Node.js nicht im Suchpfad liegt, verwendet das Startskript die lokale Codex-Laufzeitumgebung. Installiere auf anderen Computern vorher Node.js.
 
-## Progression
+## Lernfortschritt
 
-Après connexion, les notes WIM, fiches terminées, cartes mémorisées, résultats
-et dernier Klausur sont sauvegardés dans le dossier privé du serveur par compte.
-Le bandeau indique l'état de sauvegarde. En cas de conflit entre fenêtres,
-choisir explicitement la copie à conserver. Éviter de modifier le même compte
-simultanément sur plusieurs fenêtres. Une copie locale par compte permet de
-réessayer une sauvegarde après une interruption réseau.
+Nach der Anmeldung speichert der Server die WIM-Notizen, abgeschlossenen Einheiten, gelernten Karteikarten, Ergebnisse und die letzte Klausur privat für jedes Konto.
+Das Banner zeigt den Speicherstatus. Wähle bei einem Konflikt zwischen Fenstern ausdrücklich aus, welche Kopie du behalten möchtest. Vermeide gleichzeitige Änderungen am selben Konto in mehreren Fenstern. Nach einer Netzunterbrechung kannst du die Speicherung mithilfe der lokalen Kopie des Kontos erneut versuchen.
 
-Les anciennes données du mode invité restent dans le navigateur. Elles ne sont
-pas attribuées automatiquement à un compte, pour éviter un mélange sur un ordinateur partagé.
-Les scènes éditées dans le studio et réponses de l'assistant restent temporaires.
-Les sessions expirent après sept jours et survivent au redémarrage du serveur.
+Frühere Gastdaten bleiben im Browser. Die Anwendung ordnet sie keinem Konto automatisch zu, damit auf gemeinsam genutzten Rechnern keine Daten vermischt werden.
+Bearbeitete Studioszenen und Antworten des Assistenten werden nur vorübergehend gespeichert.
+Sitzungen laufen nach sieben Tagen ab und bleiben bei einem Neustart des Servers erhalten.
 
-## Sauvegarder et restaurer
+## Sichern und wiederherstellen
 
-Arrêter le serveur avant toute opération de maintenance. Depuis le dossier du projet :
+Beende den Server vor der Wartung und führe im Projektverzeichnis die gewünschten Befehle aus.
 
 ```powershell
 node --env-file-if-exists=.env scripts/maintenance.mjs backup
-node --env-file-if-exists=.env scripts/maintenance.mjs restore "CHEMIN_DU_DOSSIER_DE_SAUVEGARDE"
+node --env-file-if-exists=.env scripts/maintenance.mjs restore "PFAD_ZUM_SICHERUNGSORDNER"
 ```
 
-La restauration crée un nouveau dossier sans écraser les données courantes.
-Copier le chemin affiché dans `DATA_DIR` dans `.env`, puis redémarrer.
-Les connexions de la copie restaurée sont invalidées : se reconnecter.
-Les sauvegardes contiennent des documents privés : les conserver à l'abri et
-en garder une copie sur un autre disque. Le fichier `.env` se sauvegarde séparément.
+Die Wiederherstellung legt ein neues Verzeichnis an. Trage den angezeigten Pfad als `DATA_DIR` in `.env` ein und starte den Server neu. Melde dich anschließend erneut an, da die Sitzungen der wiederhergestellten Kopie ungültig werden.
+Bewahre Sicherungen wegen der enthaltenen privaten Dokumente geschützt auf. Lege eine Kopie auf einem anderen Laufwerk ab und sichere `.env` separat.
 
-## Mot de passe oublié
+## Kennwort vergessen
 
-Le propriétaire de l'ordinateur peut réinitialiser un compte local, serveur arrêté :
+Die Person, die den Rechner verwaltet, kann ein lokales Kennwort bei beendetem Server zurücksetzen.
 
 ```powershell
-node --env-file-if-exists=.env scripts/maintenance.mjs reset-password MON_IDENTIFIANT
+node --env-file-if-exists=.env scripts/maintenance.mjs reset-password MEIN_BENUTZERNAME
 ```
 
-L'outil sauvegarde d'abord les données, génère un mot de passe aléatoire et
-invalide les connexions de ce compte. Conserver le nouveau mot de passe en privé.
-Il n'existe pas de récupération par e-mail.
+Das Werkzeug sichert zuerst die Daten, erzeugt ein zufälliges Kennwort und beendet die Sitzungen des Kontos. Bewahre das neue Kennwort vertraulich auf. Die Wiederherstellung erfolgt lokal.
 
-## IA et limites
+## KI und Funktionsumfang
 
-Configurer la clé et le modèle dans `.env`, jamais dans le navigateur ni dans Git.
-Voir `IA.md`. Sans ces paramètres, le site garde ses fiches, quiz, imports,
-examens écrits et animations. L'IA, l'OCR et la génération de vidéos avec voix
-et personnages sont des fonctions distinctes : seules les fonctions décrites
-comme implémentées sont disponibles.
+Konfiguriere Schlüssel und Modell in `.env` und halte sie aus dem Browser und Git heraus. Siehe [KI-Assistent](IA.md). Lerneinheiten, Quizze, Importe, schriftliche Klausuren und Animationen funktionieren ohne KI-Konfiguration. Texterkennung und die KI-Erzeugung von Videos mit Stimmen und Figuren sind separate Funktionen.
 
-## Hébergement futur
+## Späterer Serverbetrieb
 
-Conserver une seule instance de serveur avec un disque persistant.
-Configurer HTTPS, `PUBLIC_ORIGIN` et `COOKIE_SECURE=true` selon `DEPLOIEMENT.md`.
-Ne pas transférer le dossier de sauvegardes dans un répertoire public.
-Les mises à jour de dépendances de `sites-source/` ne sont pas nécessaires au serveur autonome.
+Betreibe eine einzelne Instanz mit dauerhaftem Speicher. Konfiguriere HTTPS, `PUBLIC_ORIGIN` und `COOKIE_SECURE=true` gemäß der [Anleitung zum Serverbetrieb](DEPLOIEMENT.md). Bewahre Sicherungen außerhalb öffentlicher Verzeichnisse auf.
+Aktualisierungen der Abhängigkeiten unter `sites-source/` sind für den eigenständigen Serverbetrieb entbehrlich.

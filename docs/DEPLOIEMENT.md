@@ -1,56 +1,46 @@
-# Héberger la version autonome
+# Eigenständige Version betreiben
 
-## Serveur Node.js
+## Node.js-Server
 
-Utilise un serveur capable d’exécuter Node.js 22.13 ou supérieur, avec un disque persistant.
+Verwende Node.js ab Version 22.13 und einen Datenträger mit dauerhaftem Speicher.
 
 ```bash
 npm start
 ```
 
-Variables principales :
-
-| Variable | Rôle |
+| Variable | Zweck |
 |---|---|
-| `PORT` | Port HTTP, 3000 par défaut |
-| `HOST` | `127.0.0.1` en local ; `0.0.0.0` dans un conteneur |
-| `PUBLIC_ORIGIN` | Origine exacte visible dans le navigateur, sans slash final |
-| `DATA_DIR` | Chemin du stockage privé, en dehors du dossier `public/` |
-| `COOKIE_SECURE` | `true` lorsque le site est servi en HTTPS |
-| `REGISTRATION_CODE` | Code facultatif exigé pour créer un compte |
-| `OPENAI_API_KEY` | Clé API facultative, uniquement côté serveur |
-| `OPENAI_MODEL` | Modèle compatible disponible pour ton compte |
-| `AI_REQUESTS_PER_HOUR` | Limite locale par utilisateur, 20 par défaut |
+| `PORT` | HTTP-Port, standardmäßig 3000 |
+| `HOST` | Lokal `127.0.0.1`, im Container `0.0.0.0` |
+| `PUBLIC_ORIGIN` | Exakte Adresse im Browser ohne abschließenden Schrägstrich |
+| `DATA_DIR` | Privater Speicherpfad außerhalb von `public/` |
+| `COOKIE_SECURE` | Bei Betrieb über HTTPS auf `true` setzen |
+| `REGISTRATION_CODE` | Optionaler Registrierungscode |
+| `OPENAI_API_KEY` | Optionaler API-Schlüssel, nur auf dem Server |
+| `OPENAI_MODEL` | Kompatibles Modell für das eigene Konto |
+| `AI_REQUESTS_PER_HOUR` | Anfragen je Konto und Stunde, standardmäßig 20 |
 
-En production, configure `PUBLIC_ORIGIN=https://ton-domaine.example` et `COOKIE_SECURE=true`. Place un reverse proxy HTTPS devant le port Node, puis garde le serveur Node inaccessible directement depuis l’extérieur si tu relies un domaine public.
+Setze im öffentlichen Betrieb `PUBLIC_ORIGIN=https://deine-domain.example` und `COOKIE_SECURE=true`. Verwende einen HTTPS-Reverse-Proxy und halte den Node.js-Port von außen unzugänglich. Prüfe bei `invalid_origin` die Browseradresse und `PUBLIC_ORIGIN`.
 
-Le contrôle d’origine des requêtes protège les actions de modification. Si tu vois `invalid_origin`, vérifie l’adresse dans le navigateur et la valeur de `PUBLIC_ORIGIN`.
+## Optionaler Betrieb mit Docker
 
-## Docker, optionnel
-
-Copie d’abord `.env.example` vers `.env`, puis :
+Kopiere `.env.example` nach `.env` und starte den Container.
 
 ```bash
 docker compose up --build -d
-```
-
-Le volume `studybridge_data` conserve les comptes et documents. L’application écoute en interne sur le port 3000. Pour un domaine public, ajoute un reverse proxy HTTPS et adapte les variables ci-dessus.
-
-```bash
 docker compose logs -f
 docker compose down
 ```
 
-Ne supprime pas le volume si tu veux conserver les données. La nouvelle image Docker a été construite et vérifiée localement le 21 octobre 2026, y compris la création de compte et la narration française. La configuration publique avec HTTPS est dans compose.public.yaml ; voir PUBLICATION-ETUDIANTE.md.
+Das Volume `studybridge_data` speichert Konten und Dokumente. Der interne Port ist 3000. Für öffentlichen HTTPS-Betrieb siehe `compose.public.yaml` und [Veröffentlichung](PUBLICATION-ETUDIANTE.md). Das Docker-Abbild wurde am 21. Oktober 2026 lokal einschließlich Kontoerstellung und französischer Vertonung geprüft.
 
-## Sauvegardes et exploitation
+## Datensicherung und Betrieb
 
-- Sauvegarde `data/` ou le volume Docker, pas seulement le dépôt Git.
-- Les comptes contiennent des mots de passe hachés avec scrypt et un sel distinct. Aucun mot de passe en clair n’est stocké.
-- Les sessions sont persistées sur disque avec les jetons hachés (expiration : sept jours). Les limites de requêtes restent en mémoire et redémarrent avec le processus.
-- Les comptes, progression et documents utilisent des fichiers JSON et des dossiers privés. Cette version cible **une seule instance**, pas un déploiement multi-réplicas.
-- Un utilisateur peut stocker au maximum 100 cours ; chaque fichier est limité à 15 Mo. Surveille l’espace disque global si tu ouvres les inscriptions.
-- Les limites de requêtes de ce projet ne remplacent pas les limites de dépenses du fournisseur IA. Configure ces dernières séparément.
-- Aucun e-mail de vérification ni récupération par e-mail n’est implémenté. Le propriétaire dispose d’un outil local de réinitialisation : voir UTILISATION.md.
+- Sichere `data/` oder das Docker-Volume separat vom Git-Repository.
+- Kennwörter werden mit scrypt und individuellem Salt gehasht. Sitzungen werden mit gehashten Token für sieben Tage auf dem Datenträger gespeichert. Anfragelimits liegen im Arbeitsspeicher und werden beim Neustart zurückgesetzt.
+- JSON-Dateien und private Verzeichnisse sind für eine einzelne Serverinstanz ausgelegt.
+- Jedes Konto kann bis zu 100 Kurse speichern. Dateien dürfen bis zu 15 MB groß sein. Überwache bei offener Registrierung den verfügbaren Speicherplatz.
+- Lege Ausgabenlimits beim KI-Anbieter separat fest.
+- Die lokale Kennwortwiederherstellung ist in der [Wartungsanleitung](UTILISATION.md) beschrieben. E-Mail-Bestätigung und Kennwortwiederherstellung per E-Mail sind nicht implementiert.
 
-Pour un établissement ou une utilisation à grande échelle, remplace les fichiers JSON et sessions mémoire par une base de données et un système d’identité adaptés, puis fais vérifier l’authentification et les sauvegardes. Ce projet constitue une base de travail fonctionnelle, pas une certification de sécurité.
+Für einen größeren institutionellen Einsatz sind eine geeignete Datenbank, ein Identitätssystem und eine Überprüfung von Authentifizierung und Sicherung erforderlich.

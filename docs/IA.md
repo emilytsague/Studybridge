@@ -1,52 +1,34 @@
-# Assistant IA : configuration et limites
+# KI-Lernassistent einrichten
 
-## Configuration indépendante
+Der eigenständige Server verwendet einen eigenen API-Schlüssel. Ein ChatGPT-Plugin ist dafür nicht erforderlich.
 
-La version autonome n’a besoin d’aucun plugin ChatGPT. Elle utilise une clé API définie sur **ton propre serveur**.
+1. Erstelle einen Schlüssel im OpenAI-Entwicklerkonto und konfiguriere Abrechnung und Limits.
+2. Trage `OPENAI_API_KEY` und `OPENAI_MODEL` in `.env` ein. Wähle ein verfügbares Modell, das Texteingaben über die Responses API akzeptiert.
+3. Starte den Server neu, melde dich an und wähle im KI-Assistenten einen Kurs aus.
 
-1. Obtiens une clé dans ton compte développeur OpenAI, puis configure les paramètres de facturation et de limites appropriés à ton usage.
-2. Renseigne `OPENAI_API_KEY` et `OPENAI_MODEL` dans `.env`.
-3. Choisis un modèle auquel ton compte a accès et qui accepte les entrées texte de l’API Responses. Aucun modèle par défaut n’est imposé dans le projet.
-4. Redémarre le serveur, connecte-toi dans StudyBridge, ouvre **Assistant IA**, choisis le cours et pose une question.
+„API konfiguriert“ bedeutet, dass beide Variablen gesetzt sind. Ob Zugang, Modell und Kontingent funktionieren, zeigt eine Anfrage.
 
-L’état « API configurée » signifie que les deux variables sont présentes. Il ne garantit pas la validité de la clé, la disponibilité du modèle ou le crédit du compte : ces points sont vérifiés lors d’un appel réel.
+## Verarbeitung
 
-## Requête implémentée
+Der Server ruft `https://api.openai.com/v1/responses` mit `store: false` und höchstens 2.600 Ausgabetokens auf. Der Schlüssel bleibt auf dem Server. Pro Anfrage werden die Frage, die Lernsprache und bis zu fünf per Stichwortsuche ausgewählte Kursauszüge mit je höchstens 2.800 Zeichen verarbeitet. Der Kurs muss für das Konto zugänglich sein.
 
-- Requête serveur vers `https://api.openai.com/v1/responses`.
-- La clé n’est jamais incluse dans le code envoyé au navigateur.
-- `store: false` et limite de sortie de 2 600 tokens.
-- Une question, la langue choisie, un cours autorisé pour l’utilisateur.
-- Recherche par mots-clés, au maximum cinq extraits de 2 800 caractères.
-- Réponses affichées comme texte échappé, pas comme HTML exécutable.
-- Les instructions contenues dans les documents sont traitées comme des données, pas comme des commandes de l’utilisateur.
-- Délai maximal de 60 secondes, erreurs explicites et quota par utilisateur.
+Dokumenttexte werden als Daten behandelt. Antworten werden als Text angezeigt. Die Zeitgrenze beträgt 60 Sekunden. Fehler werden angezeigt und Anfragen je Konto begrenzt. `store: false` deaktiviert die Speicherung der Antwort durch diesen Aufruf. Daraus ergibt sich keine allgemeine Garantie zur Aufbewahrung von Anbieterdaten.
 
-Le paramètre `store: false` désactive le stockage de la réponse prévu par cet appel. Il n’est pas présenté ici comme une garantie générale de rétention zéro des données du fournisseur.
+## Aufgaben
 
-## Actions disponibles
+- Fachbegriffe auf Deutsch und gegebenenfalls zusätzlich in der gewählten Lernsprache erklären.
+- Fünf Fragen mit Antworten und Erklärungen erstellen.
+- Acht Karteikarten formulieren.
+- Ein Skript mit drei Szenen für das lokale Animationsstudio erstellen.
 
-1. Explication pédagogique en allemand et en français/anglais.
-2. Rédaction de cinq questions avec réponses et explications.
-3. Rédaction de huit flashcards.
-4. Rédaction d’un scénario de trois scènes que le studio peut animer.
+KI-Quizze und Karteikarten erscheinen als Lerntexte. Prüfe sie anhand der Kursunterlagen. Sie werden nicht automatisch in die Übungen oder den Fortschritt übernommen.
 
-Les questions et flashcards générées s’affichent comme un texte d’étude. Elles ne sont pas ajoutées automatiquement à la banque de quiz ni à la progression. Les exercices peuvent être faux : l’étudiant doit les vérifier dans le cours.
+Das Studio animiert bearbeitbare Skripte lokal. Die Animation folgt auch bei einem KI-generierten Skript den eingebauten Regeln. Ein Dienst für KI-generierte Videos ist nicht enthalten.
 
-## Vidéo
+## Tests und technische Quellen
 
-Le studio sait animer du texte sur un canvas et l’enregistrer sans audio via le navigateur. Il ne synthétise ni personnages, ni voix, ni séquences vidéo par IA. Si le scénario vient de l’IA, l’animation reste déterministe.
+Die automatisierten Tests verwenden einen simulierten Anbieter. Es wurde kein echter API-Schlüssel verwendet. Die Implementierung sucht im Array `output` nach Nachrichten mit `output_text`.
 
-Pour une véritable génération vidéo IA, il faut ajouter un fournisseur, son authentification, les coûts, une gestion de tâches longues et un stockage des vidéos. Cette intégration n’est pas incluse et aucun bouton ne prétend la déclencher.
-
-## Tests et sources
-
-Les tests automatisés substituent une réponse simulée au fournisseur pour vérifier le format et les erreurs. **Aucun appel avec une vraie clé n’a été effectué.**
-
-Documentation officielle consultée pour l’implémentation :
-
-- Génération de texte et API Responses : https://developers.openai.com/api/docs/guides/text
-- Documentation générale : https://developers.openai.com/api/docs
-- Choix du modèle : https://developers.openai.com/api/docs/models
-
-L’implémentation lit les éléments `message` contenant `output_text` dans le tableau `output`, sans supposer que le premier élément contient la réponse.
+- [Texterzeugung mit der Responses API](https://developers.openai.com/api/docs/guides/text)
+- [API-Dokumentation](https://developers.openai.com/api/docs)
+- [Modelle](https://developers.openai.com/api/docs/models)

@@ -3,7 +3,7 @@
   "version": "1.3.0",
   "private": true,
   "type": "module",
-  "description": "Bilingual learning platform for international students",
+  "description": "Mehrsprachige Lernplattform für internationale Studierende",
   "engines": {
     "node": ">=22.13.0"
   },

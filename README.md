@@ -1,116 +1,101 @@
 # StudyBridge
 
-**Présentation du projet :** [Portfolio en allemand](README.portfolio.md) · [Prototype interactif](docs/prototype/index.html).
+[Portfolio](README.portfolio.md) · [Interaktiver Prototyp](docs/prototype/index.html) · [Entstehung und persönlicher Beitrag](docs/KI-TRANSPARENZ.md)
 
-**Projet personnel d’Emily Lucresse Tsague Mboning.** Les tests manuels, les vérifications et les ajustements de l’interface et des fonctionnalités finales ont été pris en charge par Emily. [Démarche et contributions](docs/KI-TRANSPARENZ.md).
+StudyBridge ist eine Lernplattform für internationale Studierende mit Deutsch als Standardsprache und Französisch und Englisch als weiteren Lernsprachen. Emily Lucresse Tsague Mboning hat die Anwendung manuell getestet, überprüft und die Oberfläche sowie die endgültigen Funktionen angepasst.
 
-**Lancement local :** `DEMARRER.cmd`. Voir `LIRE-MOI.txt` et `docs/UTILISATION.md` pour les sauvegardes et la récupération de compte.
+Die Anwendung läuft auf einem Node.js-Server. Jedes Konto hat einen eigenen privaten Speicher für importierte Dokumente. Das lokale Animationsstudio bietet die Figuren Aya und Noé, animierte Szenen, ein bearbeitbares Storyboard und HD-Exporte von bis zu sechs Minuten. [Animationsstudio](docs/STUDIO-ANIME.md)
 
-Plateforme de révision pour étudiants internationaux : français ou anglais, avec l’allemand en parallèle.
+## Schnellstart
 
-L’application fonctionne sur un serveur Node.js, avec des comptes propres à StudyBridge et un stockage privé des documents par compte.
-
-**Studio anime local :** personnages originaux Aya et Noé, décors animés, storyboard éditable et export HD jusqu’à six minutes, sans frais API. Voir [docs/STUDIO-ANIME.md](docs/STUDIO-ANIME.md).
-
-## Démarrage rapide sous Windows
-
-1. Installe **Node.js 22.13 ou supérieur** sur ton ordinateur : https://nodejs.org/
-2. Extrais l’archive ZIP. Ouvre le dossier `StudyBridge` dans Visual Studio Code ou dans PowerShell.
-3. Exécute :
+1. Installiere [Node.js](https://nodejs.org/) ab Version 22.13.
+2. Entpacke die ZIP-Datei und öffne das Verzeichnis in Visual Studio Code oder im Terminal.
+3. Doppelklicke unter Windows auf `DEMARRER.cmd` oder führe in PowerShell die folgenden Befehle aus.
 
 ```powershell
 Copy-Item .env.example .env
 npm start
 ```
 
-4. Ouvre **http://localhost:3000** dans ton navigateur. Utilise cette adresse exacte : elle correspond à `PUBLIC_ORIGIN` dans `.env`.
-5. Clique sur **Connexion**, puis **Créer un compte**. Choisis un identifiant et un mot de passe d’au moins 12 caractères. Le compte est propre à cette installation StudyBridge.
-6. Va dans **Importer mes cours** pour ajouter un PDF, TXT ou MD.
-
-Sous Linux/macOS :
+Unter Linux und macOS:
 
 ```bash
 cp .env.example .env
 npm start
 ```
 
-Aucune installation de dépendances npm n’est nécessaire pour la version autonome. Le serveur utilise les modules intégrés de Node.js. Le lecteur PDF.js est fourni dans `public/vendor` avec sa licence.
+4. Öffne [http://localhost:3000](http://localhost:3000). Diese Adresse entspricht `PUBLIC_ORIGIN` in der Datei `.env`.
+5. Erstelle ein Konto mit einem Kennwort von mindestens zwölf Zeichen. Das Konto gilt für diese Installation.
+6. Importiere bei Bedarf eigene Kurse als PDF-, TXT- oder Markdown-Dateien.
 
-Pour arrêter : `Ctrl+C`. Pour le développement avec redémarrage du serveur : `npm run dev`. Recharge le navigateur après une modification du frontend.
+Für die eigenständige Version ist keine Installation von npm-Abhängigkeiten erforderlich. Der Server verwendet integrierte Node.js-Module. PDF.js wird samt Lizenz unter `public/vendor` mitgeliefert.
 
-## Fonctionnalités et état réel
+Beende den Server mit Strg+C. Starte ihn für die Entwicklung mit `npm run dev` und lade den Browser nach Änderungen am Frontend neu. Hinweise zur Sicherung und Wiederherstellung stehen in [LIRE-MOI.txt](LIRE-MOI.txt) und [docs/UTILISATION.md](docs/UTILISATION.md).
 
-| Fonction | État |
+## Funktionsumfang
+
+| Funktion | Umsetzung |
 |---|---|
-| Interface français / anglais et notions allemandes | Incluse |
-| 10 fiches WIM, 30 flashcards, quiz et mini-tests | Inclus |
-| Création de compte et connexion indépendantes | Incluses, vérifiées par tests HTTP |
-| Import PDF, TXT et Markdown, jusqu’à 15 Mo / 500 pages | Inclus ; extraction PDF dans le navigateur |
-| Documents privés par compte | Isolation et accès testés |
-| Lecture du texte, recherche, téléchargement, suppression | Inclus |
-| Klausur WIM chronométré | Correction automatique QCM, remise à expiration |
-| Klausur d’un cours importé | Réponses écrites sur des extraits, grille d’auto-évaluation |
-| Assistant IA pédagogique | Code inclus ; nécessite une clé API et un modèle configurés |
-| Quiz / flashcards rédigés par l’IA | Textes d’étude dans l’assistant ; pas d’intégration automatique aux sessions |
-| Scénario d’animation rédigé par l’IA | Inclus avec l’API ; bouton pour l’ouvrir dans le studio |
-| Studio anime local et export vidéo | Aya et Noé animés, 3 décors, 1 à 12 scènes, 15 s à 6 min, vidéo HD avec narration française locale optionnelle |
-| Vidéo IA avec personnages, voix et scènes générées | Non implémentée ; nécessite un service vidéo supplémentaire |
-| OCR des PDF scannés | Non inclus |
+| Lernmaterial für Wirtschaftsinformatik (WIM) | Zehn Lerneinheiten, 30 Karteikarten, Quizze und Kurztests |
+| Anmeldung und Registrierung | Eigene StudyBridge-Konten, mit HTTP-Tests geprüft |
+| Private Kursdokumente | PDF, TXT und Markdown bis 15 MB bzw. 500 Seiten, PDF-Textextraktion im Browser |
+| Dokumentverwaltung | Lesen, Suchen, Herunterladen und Löschen, mit Tests zur Trennung der Konten |
+| Zeitgesteuerte WIM-Klausur | Automatische Abgabe nach Ablauf und automatische Auswertung der Auswahlfragen |
+| Klausur zu importierten Kursen | Schriftliche Antworten zu Textauszügen und Raster zur Selbstbewertung |
+| Optionaler KI-Lernassistent | Benötigt einen API-Schlüssel und ein konfiguriertes Modell |
+| KI-generierte Quizfragen und Karteikarten | Als Lerntexte im Assistenten verfügbar, ohne automatische Übernahme in Lernsitzungen |
+| KI-generiertes Storyboard | Über die API verfügbar und im Animationsstudio bearbeitbar |
+| Lokales Animationsstudio | Drei Hintergründe, eine bis zwölf Szenen, HD-Export von 15 Sekunden bis sechs Minuten, optional mit lokaler französischer Vertonung |
 
-**Vérifications techniques documentées :** 22 tests automatisés réussis couvrent les API, l’isolation des documents, les erreurs, l’expiration du Klausur et les réponses IA simulées. La connexion réelle à OpenAI n’a pas été testée : aucune clé API réelle n’a été utilisée. L’import du PDF WIM, la sauvegarde des notes et examens, la remise automatique et l’export vidéo ont été vérifiés dans le navigateur intégré. Voir `docs/TESTS.md`.
+Für gescannte PDFs ist eine externe Texterkennung erforderlich. KI-generierte Figuren, Stimmen und Videos würden einen zusätzlichen Dienst erfordern.
 
-## Arborescence
+## Projektstruktur
 
 ```text
 StudyBridge/
-  server.mjs                 Serveur HTTP, comptes, documents, assistant IA
-  package.json               Commandes npm, aucun module externe requis
-  .env.example               Modèle de configuration, sans secrets
-  .gitignore                 Exclut .env, données, dépendances et journaux
+  server.mjs                 HTTP-Server, Konten, Dokumente und KI-Assistent
+  package.json               npm-Befehle
+  .env.example               Konfigurationsvorlage ohne Zugangsdaten
+  .gitignore                 Schließt lokale Konfiguration, Daten und Protokolle aus
   public/
-    index.html               Point d’entrée du site
-    style.css                Styles et responsive
-    content.js               Contenu pédagogique WIM en trois langues
-    app.js                   Fiches, quiz, flashcards et progression
-    extensions.js            Import, Klausur chronométré, studio animé
-    portable.js              Connexion indépendante et interface IA
-    login.html, login.js     Connexion et création de compte
-    vendor/                  PDF.js et ressources, avec licence
-  tests/                     Tests Node.js
-  docs/                      Installation, GitHub, API, déploiement, tests
-  Dockerfile                 Conteneur optionnel
-  compose.yaml               Démarrage Docker avec volume persistant
-  .github/workflows/ci.yml   Exécution des tests à chaque push / pull request
+    index.html               Einstiegspunkt der Anwendung
+    style.css                Gestaltung für verschiedene Bildschirmgrößen
+    content.js               WIM-Lernmaterial in drei Sprachen
+    app.js                   Lerneinheiten, Quizze, Karteikarten und Fortschritt
+    extensions.js            Import, zeitgesteuerte Klausur und Animationsstudio
+    portable.js              Anmeldung und Oberfläche des KI-Assistenten
+    login.html, login.js     Anmeldung und Registrierung
+    vendor/                  PDF.js und zugehörige Ressourcen samt Lizenz
+  tests/                     Automatisierte Tests für Node.js
+  docs/                      Anleitungen zu Installation, GitHub, API und Betrieb
+  Dockerfile                 Optionaler Container
+  compose.yaml               Docker-Start mit dauerhaftem Speicher
+  .github/workflows/ci.yml   Automatisierte Tests für Pushes und Pull Requests
 ```
 
-## Assistant pédagogique optionnel
+## Optionaler KI-Lernassistent
 
-Dans `.env`, ajoute ta propre clé et le nom exact d’un modèle disponible pour ton compte API :
+Trage in `.env` deinen API-Schlüssel und den genauen Namen eines verfügbaren Modells ein und starte den Server neu.
 
 ```dotenv
-OPENAI_API_KEY=ta_cle_api
-OPENAI_MODEL=nom_exact_du_modele
+OPENAI_API_KEY=dein_api_schluessel
+OPENAI_MODEL=genauer_modellname
 ```
 
-Puis redémarre le serveur. La clé reste côté serveur. Ne la place jamais dans `public/`, le navigateur ou un commit. Ne partage pas ton fichier `.env`.
+Der Schlüssel bleibt auf dem Server. Bewahre ihn außerhalb von `public/`, dem Browser und Git auf. Teile die Datei `.env` nicht.
 
-L’API est facultative : cours, imports, quiz existants, Klausur et animations déterministes restent utilisables sans clé. L’assistant envoie seulement la question et jusqu’à cinq extraits du document sélectionné. Il ne lit pas nécessairement tout le document. Les extraits transmis apparaissent sous sa réponse.
+Lerneinheiten, Importe, vorhandene Quizze, Klausuren und lokale Animationen funktionieren ohne API-Schlüssel. Der Assistent sendet die Frage und bis zu fünf ausgewählte Ausschnitte des Dokuments. Die gesendeten Ausschnitte erscheinen unter der Antwort. Die Auswahl erfolgt per Stichwortsuche. KI-Antworten können Fehler enthalten. Kosten und API-Limits hängen vom Konto und vom Modell ab. [Anleitung zum KI-Assistenten](docs/IA.md)
 
-La sélection des extraits est une recherche simple par mots-clés, sans embeddings. Les réponses IA peuvent comporter des erreurs. Les limites API et les coûts dépendent de ton compte et du modèle choisi. L’application ne génère pas de vidéo IA et ne contient pas de clé prépayée.
+## Daten und Betrieb
 
-Détails et documentation officielle : **[docs/IA.md](docs/IA.md)**.
+- Konten und importierte Dateien liegen im von Git ausgeschlossenen Verzeichnis `data/`.
+- Ein Konto kann seine Dokumente auf mehreren Geräten abrufen, wenn alle auf denselben Server zugreifen.
+- Nach der Anmeldung werden WIM-Notizen, Karteikarten, Ergebnisse und Klausurabgaben pro Konto auf dem Server gespeichert. Der lokale Zwischenspeicher ist je Konto getrennt. Im Gastmodus bleiben die Daten im Browser. Verwende auf gemeinsam genutzten Geräten getrennte Browserprofile.
+- Anmeldesitzungen laufen nach sieben Tagen ab und bleiben bei einem Serverneustart erhalten. Die Kennwortwiederherstellung erfolgt lokal ohne E-Mail.
+- Betreibe eine einzelne Serverinstanz mit dauerhaftem Speicher. Mehrere Instanzen dürfen nicht dieselben JSON-Dateien verwenden.
+- Die mitgelieferten WIM-Lerninhalte sind für Besucher sichtbar. Selbst importierte Dokumente bleiben privat. Verweise auf das WIM-Quell-PDF setzen eine lokale Kopie voraus.
 
-## Données et déploiement
-
-- Les comptes et fichiers importés sont dans `data/`, exclu de Git.
-- Un compte retrouve ses documents sur plusieurs appareils s’ils accèdent au **même serveur**.
-- Les notes WIM, flashcards, résultats et copie du Klausur sont sauvegardés par compte sur le serveur après connexion, avec un cache local séparé. En mode invité, ils restent dans le navigateur. Sur un ordinateur partagé, utilise des profils de navigateur séparés.
-- Les sessions de connexion sont en mémoire : un redémarrage du serveur impose une nouvelle connexion.
-- Il n’y a pas de récupération de mot de passe par e-mail dans cette version.
-- Cette version est prévue pour une seule instance serveur avec un disque persistant. Ne lance pas plusieurs instances sur les mêmes fichiers JSON.
-- Les contenus WIM et leur PDF sont accessibles aux visiteurs du site. Les documents importés restent privés par compte.
-
-Pour un hébergement indépendant avec Docker, HTTPS et sauvegardes : **[docs/DEPLOIEMENT.md](docs/DEPLOIEMENT.md)**.
+[Anleitung zu Docker, HTTPS und Datensicherung](docs/DEPLOIEMENT.md)
 
 ## Tests
 
@@ -118,17 +103,12 @@ Pour un hébergement indépendant avec Docker, HTTPS et sauvegardes : **[docs/DE
 npm test
 ```
 
-Les tests n’appellent aucun fournisseur IA réel et n’entraînent aucun usage API facturable.
+Die automatisierten Tests prüfen unter anderem die API, die Trennung der Konten, Fehlerfälle, den Klausurablauf und simulierte KI-Antworten. Sie rufen keine echten KI-Dienste auf. Manuell wurden unter anderem PDF-Import, Speicherung, automatische Klausurabgabe und Videoexport geprüft. [Testdokumentation](docs/TESTS.md)
 
-## Sources pédagogiques et composants tiers
+## Lernmaterial und Drittkomponenten
 
-Les fiches WIM sont des adaptations du PDF fourni, avec des références de pages. Elles ne remplacent pas le cours officiel. Les traductions sont des aides de révision non officielles.
+Die WIM-Lerneinheiten sind inoffizielle Lernhilfen mit Seitenverweisen auf das zugrunde liegende PDF. Prüfe vor einer Veröffentlichung die Nutzungsrechte an enthaltenen Kursmaterialien. Die Anwendung fügt importierte Dateien nicht automatisch dem Repository hinzu.
 
-PDF.js est distribué avec sa licence dans `public/vendor/PDFJS-LICENSE`. Voir aussi `THIRD_PARTY_NOTICES.md`. Avant de rendre un dépôt public, assure-toi de pouvoir y publier les supports de cours que tu y inclus. Les fichiers importés via l’application ne sont jamais ajoutés automatiquement au dépôt.
+PDF.js wird unter `public/vendor/PDFJS-LICENSE` lizenziert. [Hinweise zu Drittkomponenten](THIRD_PARTY_NOTICES.md)
 
-
-## Distribution GitHub
-
-Les comptes, documents personnels, sauvegardes et le PDF source WIM ne sont pas inclus. Les liens vers le PDF WIM nécessitent une copie locale de ce document. Les modèles de voix se téléchargent avec INSTALLER-VOIX.cmd. Le dossier sites-source est une archive historique non incluse dans cette distribution.
-
-
+Konten, persönliche Dokumente, Sicherungen und das WIM-Quell-PDF sind nicht Teil der GitHub-Version. Die Sprachmodelle lassen sich mit `INSTALLER-VOIX.cmd` herunterladen. Das historische Archiv `sites-source` ist in dieser Distribution nicht enthalten.
